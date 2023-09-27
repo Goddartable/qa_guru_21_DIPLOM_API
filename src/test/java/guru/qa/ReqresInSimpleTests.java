@@ -7,10 +7,10 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
 
-public class ReqresInSimpleTests extends TestBase{
+public class ReqresInSimpleTests extends TestBase {
     @Test
     @DisplayName("CREATE")
-    void createUser(){
+    void createUser() {
         given().
                 contentType(JSON)
                 .body(randomUtils.jsonBodyCreate.toString())
@@ -23,9 +23,10 @@ public class ReqresInSimpleTests extends TestBase{
                         , "id", notNullValue()
                         , "createdAt", greaterThan(randomUtils.timeBeforeStartTest));
     }
+
     @Test
     @DisplayName("REGISTER - SUCCESSFUL")
-    void registerSuccess(){
+    void registerSuccess() {
         given().
                 contentType(JSON)
                 .when()
@@ -33,13 +34,13 @@ public class ReqresInSimpleTests extends TestBase{
                 .post("/api/register")
                 .then()
                 .statusCode(200)
-                .body("id",notNullValue()
-                , "token", notNullValue());
+                .body("id", notNullValue()
+                        , "token", notNullValue());
     }
 
     @Test
     @DisplayName("REGISTER - UNSUCCESSFUL")
-    void registerUnSuccess(){
+    void registerUnSuccess() {
         given().
                 contentType(JSON)
                 .when()
@@ -47,12 +48,12 @@ public class ReqresInSimpleTests extends TestBase{
                 .post("/api/register")
                 .then()
                 .statusCode(400)
-                .body("error",equalTo("Note: Only defined users succeed registration"));
+                .body("error", equalTo("Note: Only defined users succeed registration"));
     }
 
     @Test
     @DisplayName("LOGIN - SUCCESSFUL")
-    void loginSuccess(){
+    void loginSuccess() {
         given().
                 contentType(JSON)
                 .body(randomUtils.jsonBodyRegister.toString())
@@ -66,7 +67,7 @@ public class ReqresInSimpleTests extends TestBase{
 
     @Test
     @DisplayName("LOGIN - UNSUCCESSFUL")
-    void loginFailed(){
+    void loginFailed() {
         given().
                 contentType(JSON)
                 .body(randomUtils.jsonUserEmail.toString())

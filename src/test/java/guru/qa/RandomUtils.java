@@ -19,12 +19,12 @@ public class RandomUtils {
             .put("job", userJob);
     JSONObject jsonBodyRegisterFail = new JSONObject()
             .put("email", userEmail)
-            .put("password",userPassword);
+            .put("password", userPassword);
 
     JSONObject jsonBodyRegister = new JSONObject()
             .put("email", "eve.holt@reqres.in")
-            .put("password",userPassword);
+            .put("password", userPassword);
 
-    JSONObject  jsonUserEmail = new JSONObject()
-                .put("email", userEmail);
+    JSONObject jsonUserEmail = new JSONObject()
+            .put("email", userEmail);
 }
