@@ -3,6 +3,6 @@ package guru.qa.models;
 import lombok.Data;
 
 @Data
-public class RegisterSuccessfulModel {
+public class RegisterModel {
     String email, password;
 }
