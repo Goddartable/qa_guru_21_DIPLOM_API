@@ -19,7 +19,6 @@ import static guru.qa.specs.GetListUserSpec.requestGetListUserSpec;
 import static guru.qa.specs.GetListUserSpec.responseGetListUserSpec;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static guru.qa.helpers.CustomAllureListener.withCustomTemplates;
 
 public class ReqresInModelSpecTests extends TestBase {
     @Test
@@ -29,20 +28,20 @@ public class ReqresInModelSpecTests extends TestBase {
         createUserData.setName(randomUtils.userName);
         createUserData.setJob(randomUtils.userJob);
 
-                    CreateUserResponseModel createUserResponseModel = step("Запрос на создание пользователя", () ->
-                            given()
-                            .spec(requestSpecificationCreate)
-                            .body(createUserData)
-                            .when()
-                            .post()
-                            .then()
-                            .spec(responseSpecificationCreate)
-                            .extract().as(CreateUserResponseModel.class));
+        CreateUserResponseModel createUserResponseModel = step("Запрос на создание пользователя", () ->
+                given()
+                        .spec(requestSpecificationCreate)
+                        .body(createUserData)
+                        .when()
+                        .post()
+                        .then()
+                        .spec(responseSpecificationCreate)
+                        .extract().as(CreateUserResponseModel.class));
         step("Проверка ответа об успешном создании пользователя", () -> {
-        assertThat(createUserResponseModel.getName()).isEqualTo(randomUtils.userName);
-        assertThat(createUserResponseModel.getJob()).isEqualTo(randomUtils.userJob);
-        assertNotNull(createUserResponseModel.getId());
-        assertThat(createUserResponseModel.getCreatedAt()).isGreaterThan(randomUtils.timeBeforeStartTest);
+            assertThat(createUserResponseModel.getName()).isEqualTo(randomUtils.userName);
+            assertThat(createUserResponseModel.getJob()).isEqualTo(randomUtils.userJob);
+            assertNotNull(createUserResponseModel.getId());
+            assertThat(createUserResponseModel.getCreatedAt()).isGreaterThan(randomUtils.timeBeforeStartTest);
         });
     }
 
@@ -55,16 +54,16 @@ public class ReqresInModelSpecTests extends TestBase {
 
         RegisterSuccessfulResponseModel registerUserResponseModel = step("Запрос на регистрацию пользователя", () ->
                 given()
-                .spec(requestSpecificationRegister)
-                .body(registerUserData)
-                .when()
-                .post()
-                .then()
-                .spec(responseSpecificationRegister)
-                .extract().as(RegisterSuccessfulResponseModel.class));
+                        .spec(requestSpecificationRegister)
+                        .body(registerUserData)
+                        .when()
+                        .post()
+                        .then()
+                        .spec(responseSpecificationRegister)
+                        .extract().as(RegisterSuccessfulResponseModel.class));
         step("Проверка ответа об успешной регистрации пользователя", () -> {
-        assertNotNull(registerUserResponseModel.getId());
-        assertNotNull(registerUserResponseModel.getToken());
+            assertNotNull(registerUserResponseModel.getId());
+            assertNotNull(registerUserResponseModel.getToken());
         });
     }
 
@@ -77,15 +76,15 @@ public class ReqresInModelSpecTests extends TestBase {
 
         RegisterFailResponseModel registerFailResponseModel = step("Запрос на регистрацию пользователя", () ->
                 given()
-                .spec(requestSpecificationRegisterFailed)
-                .body(registerUserData)
-                .when()
-                .post()
-                .then()
-                .spec(responseSpecificationRegisterFailed)
-                .extract().as(RegisterFailResponseModel.class));
+                        .spec(requestSpecificationRegisterFailed)
+                        .body(registerUserData)
+                        .when()
+                        .post()
+                        .then()
+                        .spec(responseSpecificationRegisterFailed)
+                        .extract().as(RegisterFailResponseModel.class));
         step("Проверка ответа о неудачной регистрации пользователя", () -> {
-        assertThat(registerFailResponseModel.getError());
+            assertThat(registerFailResponseModel.getError());
         });
     }
 
@@ -94,30 +93,30 @@ public class ReqresInModelSpecTests extends TestBase {
     void getListUsers() {
         GetListUserModel getListUserModel = step("Запрос на просмотр списка пользователей", () ->
                 given()
-                .spec(requestGetListUserSpec)
-                .when()
-                .get()
-                .then()
-                .spec(responseGetListUserSpec)
-                .extract().as(GetListUserModel.class));
+                        .spec(requestGetListUserSpec)
+                        .when()
+                        .get()
+                        .then()
+                        .spec(responseGetListUserSpec)
+                        .extract().as(GetListUserModel.class));
         step("Проверка данных о количестве страниц", () -> {
-        assertEquals(1, getListUserModel.getPage());
-        assertEquals(6, getListUserModel.getPerPage());
-        assertEquals(12, getListUserModel.getTotal());
-        assertEquals(2, getListUserModel.getTotalPages());
+            assertEquals(1, getListUserModel.getPage());
+            assertEquals(6, getListUserModel.getPerPage());
+            assertEquals(12, getListUserModel.getTotal());
+            assertEquals(2, getListUserModel.getTotalPages());
         });
         step("Проверка данных пользователя", () -> {
-        List<GetUserDataList> data = getListUserModel.getData();
-        assertEquals(4, data.get(3).getId());
-        assertEquals("eve.holt@reqres.in", data.get(3).getEmail());
-        assertEquals("Eve", data.get(3).getFirstName());
-        assertEquals("Holt", data.get(3).getLastName());
-        assertEquals("https://reqres.in/img/faces/4-image.jpg", data.get(3).getAvatar());
+            List<GetUserDataList> data = getListUserModel.getData();
+            assertEquals(4, data.get(3).getId());
+            assertEquals("eve.holt@reqres.in", data.get(3).getEmail());
+            assertEquals("Eve", data.get(3).getFirstName());
+            assertEquals("Holt", data.get(3).getLastName());
+            assertEquals("https://reqres.in/img/faces/4-image.jpg", data.get(3).getAvatar());
         });
         step("Проверка данных о поддержке", () -> {
-        GetUserSupportModel getUserSupport = getListUserModel.getSupport();
-        assertEquals("https://reqres.in/#support-heading", getUserSupport.getUrl());
-        assertEquals("To keep ReqRes free, contributions towards server costs are appreciated!", getUserSupport.getText());
+            GetUserSupportModel getUserSupport = getListUserModel.getSupport();
+            assertEquals("https://reqres.in/#support-heading", getUserSupport.getUrl());
+            assertEquals("To keep ReqRes free, contributions towards server costs are appreciated!", getUserSupport.getText());
         });
     }
 }
