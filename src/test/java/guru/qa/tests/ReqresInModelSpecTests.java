@@ -4,6 +4,8 @@ import guru.qa.models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +17,9 @@ import static guru.qa.specs.RegisterUserFailSpec.requestSpecificationRegisterFai
 import static guru.qa.specs.RegisterUserFailSpec.responseSpecificationRegisterFailed;
 import static guru.qa.specs.RegisterUserSuccSpec.requestSpecificationRegister;
 import static guru.qa.specs.RegisterUserSuccSpec.responseSpecificationRegister;
+import static guru.qa.specs.GetListUserSpec.requestGetListUserSpec;
+import static guru.qa.specs.GetListUserSpec.responseGetListUserSpec;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ReqresInModelSpecTests extends TestBase {
@@ -59,66 +64,46 @@ public class ReqresInModelSpecTests extends TestBase {
         assertNotNull(registerUserResponseModel.getToken());
     }
 
-   @Test
+    @Test
     @DisplayName("REGISTER - UNSUCCESSFUL with Lombok Model and Spec")
     void registerUnSuccess() {
-       RegisterModel registerUserData = new RegisterModel();
-       registerUserData.setEmail(randomUtils.userEmail);
-       registerUserData.setPassword(randomUtils.userPassword);
+        RegisterModel registerUserData = new RegisterModel();
+        registerUserData.setEmail(randomUtils.userEmail);
+        registerUserData.setPassword(randomUtils.userPassword);
 
-       RegisterFailResponseModel registerFailResponseModel = given()
-               .spec(requestSpecificationRegisterFailed)
-               .body(registerUserData)
-               .when()
-               .post()
-               .then()
-               .spec(responseSpecificationRegisterFailed)
-               .extract().as(RegisterFailResponseModel.class);
-       assertThat(registerFailResponseModel.getError());
+        RegisterFailResponseModel registerFailResponseModel = given()
+                .spec(requestSpecificationRegisterFailed)
+                .body(registerUserData)
+                .when()
+                .post()
+                .then()
+                .spec(responseSpecificationRegisterFailed)
+                .extract().as(RegisterFailResponseModel.class);
+        assertThat(registerFailResponseModel.getError());
     }
 
     @Test
     @DisplayName("LIST USERS with Lombok Model and Spec")
-    void getListUsers(){
-        GetListUserModel getListUserModel = new GetListUserModel();
-        given().
-                contentType(JSON)
-                .body()
-                .when("/users?page=2")
-                .post()
-                .then()
-                .statusCode()
-                .body();
-    }
-
-    }
-
-   /* @Test
-    @DisplayName("LOGIN - SUCCESSFUL")
-    void loginSuccess() {
-        given().
-                contentType(JSON)
-                .body(randomUtils.jsonBodyRegister.toString())
+    void getListUsers() {
+        GetListUserModel getListUserModel = given()
+                .spec(requestGetListUserSpec)
                 .when()
-                .post("/api/login")
+                .get()
                 .then()
-                .statusCode(200)
-                .body("token", equalTo("QpwL5tke4Pnpja7X4"));
-
+                .spec(responseGetListUserSpec)
+                .extract().as(GetListUserModel.class);
+        assertEquals(1, getListUserModel.getPage());
+        assertEquals(6, getListUserModel.getPerPage());
+        assertEquals(12, getListUserModel.getTotal());
+        assertEquals(2, getListUserModel.getTotalPages());
+        List<GetUserDataList> data = getListUserModel.getData();
+        assertEquals(4, data.get(3).getId());
+        assertEquals("eve.holt@reqres.in", data.get(3).getEmail());
+        assertEquals("Eve", data.get(3).getFirstName());
+        assertEquals("Holt", data.get(3).getLastName());
+        assertEquals("https://reqres.in/img/faces/4-image.jpg", data.get(3).getAvatar());
+        GetUserSupportModel getUserSupport = getListUserModel.getSupport();
+        assertEquals("https://reqres.in/#support-heading", getUserSupport.getUrl());
+        assertEquals("To keep ReqRes free, contributions towards server costs are appreciated!", getUserSupport.getText());
     }
-
-    @Test
-    @DisplayName("LOGIN - UNSUCCESSFUL")
-    void loginFailed() {
-        given().
-                contentType(JSON)
-                .body(randomUtils.jsonUserEmail.toString())
-                .when()
-                .post("/api/login")
-                .then()
-                .statusCode(400)
-                .body("error", equalTo("Missing password"));
-
-    }*/
-
 }
