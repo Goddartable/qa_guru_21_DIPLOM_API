@@ -8,9 +8,11 @@ import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.RestAssured.with;
 import static org.hamcrest.Matchers.notNullValue;
+import static guru.qa.helpers.CustomAllureListener.withCustomTemplates;
 
 public class CreateUserSpec {
     public static RequestSpecification requestSpecificationCreate = with()
+            .filter(withCustomTemplates())
             .basePath("/api/users")
             .log().all()
             .contentType(ContentType.JSON);
