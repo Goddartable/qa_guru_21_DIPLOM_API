@@ -2,6 +2,7 @@ package guru.qa.tests;
 
 import guru.qa.models.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ReqresInModelSpecTests extends TestBase {
     @Test
+    @Tag("reqres")
     @DisplayName("CREATE с использованием Lombok, Model и Spec")
     void createUser() {
         CreateUserModel createUserData = new CreateUserModel();
@@ -46,6 +48,7 @@ public class ReqresInModelSpecTests extends TestBase {
     }
 
     @Test
+    @Tag("reqres")
     @DisplayName("REGISTER - SUCCESSFUL с использованием Lombok, Model и Spec")
     void registerSuccess() {
         RegisterModel registerUserData = new RegisterModel();
@@ -68,6 +71,7 @@ public class ReqresInModelSpecTests extends TestBase {
     }
 
     @Test
+    @Tag("reqres")
     @DisplayName("REGISTER - UNSUCCESSFUL с использованием Lombok, Model и Spec")
     void registerUnSuccess() {
         RegisterModel registerUserData = new RegisterModel();
@@ -89,6 +93,7 @@ public class ReqresInModelSpecTests extends TestBase {
     }
 
     @Test
+    @Tag("reqres")
     @DisplayName("LIST USERS с использованием Lombok, Model и Spec")
     void getListUsers() {
         GetListUserModel getListUserModel = step("Запрос на просмотр списка пользователей", () ->

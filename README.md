@@ -41,13 +41,12 @@
 ## :desktop_computer: Команды запуска тестов в терминале
 #### Команды для локального запуска:
 ```bash
-./gradlew clean taskWithTag***
+./gradlew clean taskWithTagReqres
 ```
 
 #### Команды для удаленного запуска:
 ```bash
-clean 
-taskWithTag***
+clean taskWithTagReqres
 ```
 
 ## <img width="5%" title="Allure" src="images/logo/allureReport.svg"> Интеграция с Allure report
