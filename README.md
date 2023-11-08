@@ -30,9 +30,10 @@
 </p>
 
 ## :clipboard: Тестовые сценарии
-+ :white_check_mark: ***
-+ :white_check_mark: ***
-+ :white_check_mark: ***
++ :white_check_mark: Создание пользователя
++ :white_check_mark: Успешная регистрация пользователя
++ :white_check_mark: Неудачная регистрация пользователя
++ :white_check_mark: Проверка списка пользователей
 
 ## <img width="5%" src="images/logo/jenkins.svg"> Сборка в Jenkins
 <kbd>[![](images/screenshots/JenkinsStart.jpg)](https://jenkins.autotests.cloud/job/***/)</kbd>
