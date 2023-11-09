@@ -36,7 +36,7 @@
 + :white_check_mark: Проверка списка пользователей
 
 ## <img width="5%" src="images/logo/jenkins.svg"> Сборка в Jenkins
-<kbd>[![](images/screenshots/JenkinsStart.jpg)](https://jenkins.autotests.cloud/job/***/)</kbd>
+<kbd>[![](images/results/JenkinsStart.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/)</kbd>
 
 ## :desktop_computer: Команды запуска тестов в терминале
 #### Команды для локального запуска:
@@ -66,7 +66,7 @@ clean api_test
 
 ## <img width="5%" title="Allure" src="images/logo/allureTestOps.svg"> Интеграция с Allure TestOps
 #### Диаграммы прохождения тестов:
-<kbd>![](images/results/***.jpg)</kbd>
+<kbd>![](images/results/AllureTestopsScheme.jpg)</kbd>
 
 #### Развернутый результат прохождения тестов:
 | Левая часть скриншота | Правая часть скриншота            |
@@ -77,11 +77,11 @@ clean api_test
 |                       | Исходники консоли браузера        |
 |                       | Финальный ролик с процессом теста |
 
-<kbd>![](images/results/***.jpg)</kbd>
+<kbd>![](images/results/AllureTestOpsTestCases.jpg)</kbd>
 
 ## <img width="5%" title="Jira" src="images/logo/jira.svg"> Интеграция с Jira
-<kbd>![](images/screenshots/JiraResult.jpg)</kbd>
+<kbd>![](images/results/JiraResult.jpg)</kbd>
 
 ## <img width="5%" title="Telegram" src="images/logo/telegram.svg"> Информирование в Telegram
 #### Оповещение ведется при помощи Telegram bot API:
-<kbd>![](images/results/***.jpg)</kbd>
+<kbd>![](images/results/TelegramResult.jpg)</kbd>
