@@ -36,7 +36,7 @@
 + :white_check_mark: Проверка списка пользователей
 
 ## <img width="5%" src="images/logo/jenkins.svg"> Сборка в Jenkins
-<kbd>[![](images/results/JenkinsStart.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/)</kbd>
+<kbd>[![](images/results/JenkinsStart.JPG)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/)</kbd>
 
 ## :desktop_computer: Команды запуска тестов в терминале
 #### Команды для локального запуска:
