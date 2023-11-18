@@ -52,7 +52,7 @@ clean api_test
 
 ## <img width="5%" title="Allure" src="images/logo/allureReport.svg"> Интеграция с Allure report
 #### Диаграммы прохождения тестов:
-<kbd>[![](images/results/AllureReportScheme.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/allure/#)</kbd>
+<kbd>[![](images/results/AllureReportScheme.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/12/allure/)</kbd>
 
 #### Развернутый результат прохождения тестов:
 | Левая часть скриншота | Правая часть скриншота            |
@@ -63,7 +63,7 @@ clean api_test
 |                       | Исходники консоли браузера        |
 |                       | Финальный ролик с процессом теста |
 
-<kbd>[![](images/results/AllureReportTestCases.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/allure/#suites/e5c81c0456aaf0ee8622d771bac038b8/b18314c12160e35b/)</kbd>
+<kbd>[![](images/results/AllureReportTestCases.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/12/allure/#suites)</kbd>
 
 ## <img width="5%" title="Allure" src="images/logo/allureTestOps.svg"> Интеграция с Allure TestOps
 #### Диаграммы прохождения тестов:
