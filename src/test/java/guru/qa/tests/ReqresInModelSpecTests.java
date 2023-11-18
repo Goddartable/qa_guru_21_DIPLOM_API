@@ -18,14 +18,40 @@ import static guru.qa.specs.RegisterUserSuccSpec.requestSpecificationRegister;
 import static guru.qa.specs.RegisterUserSuccSpec.responseSpecificationRegister;
 import static guru.qa.specs.GetListUserSpec.requestGetListUserSpec;
 import static guru.qa.specs.GetListUserSpec.responseGetListUserSpec;
+import static guru.qa.specs.SuccLoginSpec.requestSpecificationSuccLogin;
+import static guru.qa.specs.SuccLoginSpec.responseSpecificationSuccLogin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ReqresInModelSpecTests extends TestBase {
+
+    @Test
+    @Tag("reqres")
+    @DisplayName("LOGIN - SUCCESSFUL с использованием Lombok, Model и Spec")
+    void loginSuccessTest() {
+        LoginModel loginModel = new LoginModel();
+        loginModel.setEmail("eve.holt@reqres.in");
+        loginModel.setPassword("cityslicka");
+
+        LoginResponseModel succLoginResponseModel = step("Запрос на авторизацию пользователя", () ->
+                given()
+                        .spec(requestSpecificationSuccLogin)
+                        .body(loginModel)
+                        .when()
+                        .post()
+                        .then()
+                        .spec(responseSpecificationSuccLogin)
+                        .extract().as(LoginResponseModel.class));
+        step("Проверка ответа об успешной авторизации пользователя", () ->
+            assertNotNull(succLoginResponseModel.getToken())
+        );
+        }
+
+
     @Test
     @Tag("reqres")
     @DisplayName("CREATE с использованием Lombok, Model и Spec")
-    void createUser() {
+    void createUserTest() {
         CreateUserModel createUserData = new CreateUserModel();
         createUserData.setName(randomUtils.userName);
         createUserData.setJob(randomUtils.userJob);
@@ -50,7 +76,7 @@ public class ReqresInModelSpecTests extends TestBase {
     @Test
     @Tag("reqres")
     @DisplayName("REGISTER - SUCCESSFUL с использованием Lombok, Model и Spec")
-    void registerSuccess() {
+    void registerSuccessTest() {
         RegisterModel registerUserData = new RegisterModel();
         registerUserData.setEmail("eve.holt@reqres.in");
         registerUserData.setPassword(randomUtils.userPassword);
@@ -73,7 +99,7 @@ public class ReqresInModelSpecTests extends TestBase {
     @Test
     @Tag("reqres")
     @DisplayName("REGISTER - UNSUCCESSFUL с использованием Lombok, Model и Spec")
-    void registerUnSuccess() {
+    void registerUnSuccessTest() {
         RegisterModel registerUserData = new RegisterModel();
         registerUserData.setEmail(randomUtils.userEmail);
         registerUserData.setPassword(randomUtils.userPassword);
@@ -95,7 +121,7 @@ public class ReqresInModelSpecTests extends TestBase {
     @Test
     @Tag("reqres")
     @DisplayName("LIST USERS с использованием Lombok, Model и Spec")
-    void getListUsers() {
+    void getListUsersTest() {
         GetListUserModel getListUserModel = step("Запрос на просмотр списка пользователей", () ->
                 given()
                         .spec(requestGetListUserSpec)
