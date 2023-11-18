@@ -60,8 +60,7 @@ clean api_test
 | Тестовые сценарии     | Подробное описание шагов          |
 |                       | Финальный скриншот каждого теста  |
 |                       | Исходники страницы теста          |
-|                       | Исходники консоли браузера        |
-|                       | Финальный ролик с процессом теста |
+|                       | Исходники консоли браузера        |                
 
 <kbd>[![](images/results/AllureReportTestCases.jpg)](https://jenkins.autotests.cloud/job/qa_guru_21_DIPLOM_API/12/allure/#suites)</kbd>
 
@@ -76,7 +75,6 @@ clean api_test
 |                       | Финальный скриншот каждого теста  |
 |                       | Исходники страницы теста          |
 |                       | Исходники консоли браузера        |
-|                       | Финальный ролик с процессом теста |
 
 <kbd>![](images/results/AllureTestOpsTestCases.jpg)</kbd>
 
