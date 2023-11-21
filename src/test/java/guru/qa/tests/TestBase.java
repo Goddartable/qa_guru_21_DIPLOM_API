@@ -1,5 +1,6 @@
 package guru.qa.tests;
 
+import guru.qa.utils.RandomUtils;
 import org.junit.jupiter.api.BeforeAll;
 import io.restassured.RestAssured;
 
