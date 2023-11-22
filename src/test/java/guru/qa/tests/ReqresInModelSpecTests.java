@@ -20,7 +20,6 @@ import static guru.qa.specs.GetListUserSpec.requestGetListUserSpec;
 import static guru.qa.specs.GetListUserSpec.responseGetListUserSpec;
 import static guru.qa.specs.SuccLoginSpec.requestSpecificationSuccLogin;
 import static guru.qa.specs.SuccLoginSpec.responseSpecificationSuccLogin;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReqresInModelSpecTests extends TestBase {
 
@@ -44,7 +43,6 @@ public class ReqresInModelSpecTests extends TestBase {
         step("Проверка ответа об успешной авторизации пользователя", () ->
                 assertThat(succLoginResponseModel.getToken()).isNotNull());
     }
-
 
     @Test
     @Tag("reqres")
@@ -129,23 +127,23 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseGetListUserSpec)
                         .extract().as(GetListUserModel.class));
         step("Проверка данных о количестве страниц", () -> {
-            assertEquals(1, getListUserModel.getPage());
-            assertEquals(6, getListUserModel.getPerPage());
-            assertEquals(12, getListUserModel.getTotal());
-            assertEquals(2, getListUserModel.getTotalPages());
+            assertThat(1).isEqualTo(getListUserModel.getPage());
+            assertThat(6).isEqualTo(getListUserModel.getPerPage());
+            assertThat(12).isEqualTo(getListUserModel.getTotal());
+            assertThat(2).isEqualTo(getListUserModel.getTotalPages());
         });
         step("Проверка данных пользователя", () -> {
             List<GetUserDataList> data = getListUserModel.getData();
-            assertEquals(4, data.get(3).getId());
-            assertEquals("eve.holt@reqres.in", data.get(3).getEmail());
-            assertEquals("Eve", data.get(3).getFirstName());
-            assertEquals("Holt", data.get(3).getLastName());
-            assertEquals("https://reqres.in/img/faces/4-image.jpg", data.get(3).getAvatar());
+            assertThat(4).isEqualTo(data.get(3).getId());
+            assertThat("eve.holt@reqres.in").isEqualTo(data.get(3).getEmail());
+            assertThat("Eve").isEqualTo(data.get(3).getFirstName());
+            assertThat("Holt").isEqualTo(data.get(3).getLastName());
+            assertThat("https://reqres.in/img/faces/4-image.jpg").isEqualTo(data.get(3).getAvatar());
         });
         step("Проверка данных о поддержке", () -> {
             GetUserSupportModel getUserSupport = getListUserModel.getSupport();
-            assertEquals("https://reqres.in/#support-heading", getUserSupport.getUrl());
-            assertEquals("To keep ReqRes free, contributions towards server costs are appreciated!", getUserSupport.getText());
+            assertThat("https://reqres.in/#support-heading").isEqualTo(getUserSupport.getUrl());
+            assertThat("To keep ReqRes free, contributions towards server costs are appreciated!").isEqualTo(getUserSupport.getText());
         });
     }
 }
