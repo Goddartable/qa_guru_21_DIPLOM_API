@@ -113,7 +113,7 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseSpecificationRegisterFailed)
                         .extract().as(RegisterFailResponseModel.class));
         step("Проверка ответа о неудачной регистрации пользователя", () -> {
-            assertThat(registerFailResponseModel.getError());
+            assertThat("Note: Only defined users succeed registration").isEqualTo(registerFailResponseModel.getError());
         });
     }
 
