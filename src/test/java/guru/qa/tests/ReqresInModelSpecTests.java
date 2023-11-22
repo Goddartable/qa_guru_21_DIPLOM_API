@@ -43,8 +43,7 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseSpecificationSuccLogin)
                         .extract().as(LoginResponseModel.class));
         step("Проверка ответа об успешной авторизации пользователя", () ->
-            assertNotNull(succLoginResponseModel.getToken())
-        );
+            assertThat(succLoginResponseModel.getToken()).isNotNull());
         }
 
 
@@ -68,7 +67,7 @@ public class ReqresInModelSpecTests extends TestBase {
         step("Проверка ответа об успешном создании пользователя", () -> {
             assertThat(createUserResponseModel.getName()).isEqualTo(randomUtils.userName);
             assertThat(createUserResponseModel.getJob()).isEqualTo(randomUtils.userJob);
-            assertNotNull(createUserResponseModel.getId());
+            assertThat(createUserResponseModel.getId()).isNotNull();
             assertThat(createUserResponseModel.getCreatedAt()).isGreaterThan(randomUtils.timeBeforeStartTest);
         });
     }
@@ -91,8 +90,8 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseSpecificationRegister)
                         .extract().as(RegisterSuccessfulResponseModel.class));
         step("Проверка ответа об успешной регистрации пользователя", () -> {
-            assertNotNull(registerUserResponseModel.getId());
-            assertNotNull(registerUserResponseModel.getToken());
+            assertThat(registerUserResponseModel.getId()).isNotNull();
+            assertThat(registerUserResponseModel.getToken()).isNotNull();
         });
     }
 
