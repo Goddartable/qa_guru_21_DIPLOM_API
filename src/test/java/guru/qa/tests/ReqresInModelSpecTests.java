@@ -1,6 +1,7 @@
 package guru.qa.tests;
 
 import guru.qa.models.*;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,7 @@ public class ReqresInModelSpecTests extends TestBase {
     @Tag("reqres")
     @DisplayName("CREATE с использованием Lombok, Model и Spec")
     void createUserTest() {
+        SoftAssertions softly = new SoftAssertions();
         CreateUserModel createUserData = new CreateUserModel();
         createUserData.setName(randomUtils.userName);
         createUserData.setJob(randomUtils.userJob);
@@ -62,10 +64,10 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseSpecificationCreate)
                         .extract().as(CreateUserResponseModel.class));
         step("Проверка ответа об успешном создании пользователя", () -> {
-            assertThat(createUserResponseModel.getName()).isEqualTo(randomUtils.userName);
-            assertThat(createUserResponseModel.getJob()).isEqualTo(randomUtils.userJob);
-            assertThat(createUserResponseModel.getId()).isNotNull();
-            assertThat(createUserResponseModel.getCreatedAt()).isGreaterThan(randomUtils.timeBeforeStartTest);
+            softly.assertThat(createUserResponseModel.getName()).isEqualTo(randomUtils.userName);
+            softly.assertThat(createUserResponseModel.getJob()).isEqualTo(randomUtils.userJob);
+            softly.assertThat(createUserResponseModel.getId()).isNotNull();
+            softly.assertThat(createUserResponseModel.getCreatedAt()).isGreaterThan(randomUtils.timeBeforeStartTest);
         });
     }
 
@@ -73,6 +75,7 @@ public class ReqresInModelSpecTests extends TestBase {
     @Tag("reqres")
     @DisplayName("REGISTER - SUCCESSFUL с использованием Lombok, Model и Spec")
     void registerSuccessTest() {
+        SoftAssertions softly = new SoftAssertions();
         RegisterModel registerUserData = new RegisterModel();
         registerUserData.setEmail("eve.holt@reqres.in");
         registerUserData.setPassword(randomUtils.userPassword);
@@ -87,8 +90,8 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseSpecificationRegister)
                         .extract().as(RegisterSuccessfulResponseModel.class));
         step("Проверка ответа об успешной регистрации пользователя", () -> {
-            assertThat(registerUserResponseModel.getId()).isNotNull();
-            assertThat(registerUserResponseModel.getToken()).isNotNull();
+            softly.assertThat(registerUserResponseModel.getId()).isNotNull();
+            softly.assertThat(registerUserResponseModel.getToken()).isNotNull();
         });
     }
 
@@ -118,6 +121,7 @@ public class ReqresInModelSpecTests extends TestBase {
     @Tag("reqres")
     @DisplayName("LIST USERS с использованием Lombok, Model и Spec")
     void getListUsersTest() {
+        SoftAssertions softly = new SoftAssertions();
         GetListUserModel getListUserModel = step("Запрос на просмотр списка пользователей", () ->
                 given()
                         .spec(requestGetListUserSpec)
@@ -127,23 +131,23 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseGetListUserSpec)
                         .extract().as(GetListUserModel.class));
         step("Проверка данных о количестве страниц", () -> {
-            assertThat(1).isEqualTo(getListUserModel.getPage());
-            assertThat(6).isEqualTo(getListUserModel.getPerPage());
-            assertThat(12).isEqualTo(getListUserModel.getTotal());
-            assertThat(2).isEqualTo(getListUserModel.getTotalPages());
+            softly.assertThat(1).isEqualTo(getListUserModel.getPage());
+            softly.assertThat(6).isEqualTo(getListUserModel.getPerPage());
+            softly.assertThat(12).isEqualTo(getListUserModel.getTotal());
+            softly.assertThat(2).isEqualTo(getListUserModel.getTotalPages());
         });
         step("Проверка данных пользователя", () -> {
             List<GetUserDataList> data = getListUserModel.getData();
-            assertThat(4).isEqualTo(data.get(3).getId());
-            assertThat("eve.holt@reqres.in").isEqualTo(data.get(3).getEmail());
-            assertThat("Eve").isEqualTo(data.get(3).getFirstName());
-            assertThat("Holt").isEqualTo(data.get(3).getLastName());
-            assertThat("https://reqres.in/img/faces/4-image.jpg").isEqualTo(data.get(3).getAvatar());
+            softly.assertThat(4).isEqualTo(data.get(3).getId());
+            softly.assertThat("eve.holt@reqres.in").isEqualTo(data.get(3).getEmail());
+            softly.assertThat("Eve").isEqualTo(data.get(3).getFirstName());
+            softly.assertThat("Holt").isEqualTo(data.get(3).getLastName());
+            softly.assertThat("https://reqres.in/img/faces/4-image.jpg").isEqualTo(data.get(3).getAvatar());
         });
         step("Проверка данных о поддержке", () -> {
             GetUserSupportModel getUserSupport = getListUserModel.getSupport();
-            assertThat("https://reqres.in/#support-heading").isEqualTo(getUserSupport.getUrl());
-            assertThat("To keep ReqRes free, contributions towards server costs are appreciated!").isEqualTo(getUserSupport.getText());
+            softly.assertThat("https://reqres.in/#support-heading").isEqualTo(getUserSupport.getUrl());
+            softly.assertThat("To keep ReqRes free, contributions towards server costs are appreciated!").isEqualTo(getUserSupport.getText());
         });
     }
 }
