@@ -21,7 +21,6 @@ import static guru.qa.specs.GetListUserSpec.responseGetListUserSpec;
 import static guru.qa.specs.SuccLoginSpec.requestSpecificationSuccLogin;
 import static guru.qa.specs.SuccLoginSpec.responseSpecificationSuccLogin;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ReqresInModelSpecTests extends TestBase {
 
@@ -43,8 +42,8 @@ public class ReqresInModelSpecTests extends TestBase {
                         .spec(responseSpecificationSuccLogin)
                         .extract().as(LoginResponseModel.class));
         step("Проверка ответа об успешной авторизации пользователя", () ->
-            assertThat(succLoginResponseModel.getToken()).isNotNull());
-        }
+                assertThat(succLoginResponseModel.getToken()).isNotNull());
+    }
 
 
     @Test
